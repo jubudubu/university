@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @RequestMapping(path="/api/v1/user")
 public class UserController {
 
-    UsertService usertService;
+    UserService userService;
 
 //    @GetMapping
 //    public String hello() {
@@ -20,19 +20,21 @@ public class UserController {
 //        return (List.of("Hello", "World"));
 //    }
 
-    @PostMapping
-    public void registerNewUser(
-            @RequestParam String name,
-            @RequestParam String dob,
-            @RequestParam String email
-    ) {
-        User user = new User(name, email, LocalDate.parse(dob));
-        usertService.addNewUser(user);
-    }
+//    @PostMapping
+//    public void registerNewUser(
+//            @RequestParam String name,
+//            @RequestParam String dob,
+//            @RequestParam String email,
+//            @RequestParam Long pass,
+//            @RequestParam Role role
+//    ) {
+//        User user = new User(name, email, LocalDate.parse(dob), pass, role);
+//        userService.addNewUser(user);
+//    }
 
     @DeleteMapping(path = "{userId}")
     public void deleteUser(@PathVariable("userId") Long userId) {
-        usertService.deleteUser(userId);
+        userService.deleteUser(userId);
     }
 
     @PutMapping(path = "{userId}")
@@ -42,7 +44,7 @@ public class UserController {
             @RequestParam(required = false) String email
     ) {
         System.out.println("name: " + name + "email" + email);
-        usertService.updateUser(userId, name, email);
+        userService.updateUser(userId, name, email);
     }
 }
 

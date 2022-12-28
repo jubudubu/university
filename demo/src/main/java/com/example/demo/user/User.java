@@ -1,11 +1,16 @@
 package com.example.demo.user;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Entity
-@Table
+@Table(name = "users")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class User {
     @Id
     @SequenceGenerator(
@@ -17,6 +22,9 @@ public class User {
             strategy = GenerationType.SEQUENCE,
             generator = "user_sequence"
     )
+    @Column(name = "userId")
+
+
     private Long id;
     private String name;
     private String email;
@@ -24,53 +32,11 @@ public class User {
 
     private Long password;
 
-    public User() {
-    }
+    private Role role;
 
-    public User(String name, String email, LocalDate dob) {
-        this.name = name;
-        this.email = email;
-        this.dob = dob;
-    }
-
-    public User(Long id, String name, String email, LocalDate dob) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.dob = dob;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public LocalDate getDob() {
-        return dob;
-    }
-
-    public void setDob(LocalDate dob) {
-        this.dob = dob;
-    }
+//    @OneToOne
+//    @JoinColumn(name = "roleId", referencedColumnName = "roleId")
+//    private Role role;
 
     @Override
     public String toString() {
