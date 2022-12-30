@@ -1,9 +1,11 @@
 package com.example.demo.user;
 
+import com.example.demo.role.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Entity
 @Table(name = "users")
@@ -27,24 +29,11 @@ public class User {
 
     private Long id;
     private String name;
-    private String email;
-    private LocalDate dob;
+    private String username;
+    private String password;
 
-    private Long password;
 
-    private Role role;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Collection<Role> roles = new ArrayList<>();
 
-//    @OneToOne
-//    @JoinColumn(name = "roleId", referencedColumnName = "roleId")
-//    private Role role;
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", dob=" + dob +
-                '}';
-    }
 }

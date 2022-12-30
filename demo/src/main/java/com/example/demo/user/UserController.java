@@ -1,19 +1,19 @@
 package com.example.demo.user;
 
+//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-
 @RestController
-@RequestMapping(path="/api/v1/user")
+@RequestMapping(path="/user")
 public class UserController {
 
     UserService userService;
 
-//    @GetMapping
-//    public String hello() {
-//        return "blabla";
-//    }
+//    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping
+    public String hello() {
+        return "blabla";
+    }
 //
 //    @GetMapping
 //    public List<String> helloList() {
@@ -23,12 +23,10 @@ public class UserController {
 //    @PostMapping
 //    public void registerNewUser(
 //            @RequestParam String name,
-//            @RequestParam String dob,
-//            @RequestParam String email,
 //            @RequestParam Long pass,
 //            @RequestParam Role role
 //    ) {
-//        User user = new User(name, email, LocalDate.parse(dob), pass, role);
+//        User user = new User(name, pass, role);
 //        userService.addNewUser(user);
 //    }
 
@@ -41,10 +39,10 @@ public class UserController {
     public void updateUser(
             @PathVariable("userId") Long userId,
             @RequestParam(required = false) String name,
-            @RequestParam(required = false) String email
+            @RequestParam(required = false) String username
     ) {
-        System.out.println("name: " + name + "email" + email);
-        userService.updateUser(userId, name, email);
+        System.out.println("name: " + name + "username" + username);
+        userService.updateUser(userId, name, username);
     }
 }
 

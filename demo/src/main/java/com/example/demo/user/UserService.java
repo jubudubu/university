@@ -23,11 +23,11 @@ public abstract class UserService {
     }
 
     public void addNewUser(User user) {
-        Optional<User> userByEmail = userRepository.
-                findUserByEmail(user.getEmail());
+        Optional<User> userByUsername = userRepository.
+                findUserByUsername(user.getUsername());
 
-        if (userByEmail.isPresent()) {
-            throw new IllegalStateException("email taken");
+        if (userByUsername.isPresent()) {
+            throw new IllegalStateException("username taken");
         }
 
         userRepository.save(user);
@@ -45,18 +45,18 @@ public abstract class UserService {
     }
 
     @Transactional
-    public void updateUser(Long userId, String name, String email) {
+    public void updateUser(Long userId, String name, String username) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalStateException(
                         "user with id " + userId + " does not exist"
                 ));
 
-        if (name != null && name.length() > 0 &&  !Objects.equals(user.getName(), name)) {
-            user.setName(name);
+        if (name != null && name.length() > 0 &&  !Objects.equals(user.getUsername(), name)) {
+            user.setUsername(name);
         }
 
-        if (email != null && email.length() > 0 && !Objects.equals(user.getEmail(), email)) {
-            user.setEmail(email);
+        if (username != null && username.length() > 0 && !Objects.equals(user.getUsername(), username)) {
+            user.setUsername(username);
         }
     }
 
