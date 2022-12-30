@@ -1,15 +1,22 @@
 package com.example.demo.login;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 
-@Controller
+@RestController
+@RequestMapping
 public class LoginController {
 
     @GetMapping(value = { "/"})
+    public String hello() {
+        return "WELCOME";
+    }
+
+    @GetMapping(value = { "/a"})
     public ModelAndView welcomePage() {
         ModelAndView model = new ModelAndView();
         model.setViewName("welcomePage");
